@@ -1,0 +1,10 @@
+{
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "*",
+        "zircote/swagger-php": "3.3.3",
+        "rbdwllr/reallysimplejwt": "^5.0",
+        "guzzlehttp/guzzle": "^7.10"
+    }
+       
+}

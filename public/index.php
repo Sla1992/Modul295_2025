@@ -16,7 +16,7 @@ require_once __DIR__ . '/../src/TaskController.php';
 set_exception_handler("ErrorHandler::handleException");
 
 $secret = 'sec!ReT423*&'; 
-$tokenExpiry = 3600; 
+$tokenExpiry = time() + 3600; 
 
 $app = AppFactory::create();
 
@@ -59,14 +59,13 @@ $app->post('/auth', function (Request $request, Response $response) use ($secret
     $username = $data['username'] ?? '';
     $password = $data['password'] ?? '';
 
-    if ($username === 'admin' && $password === 'pass') {
+    if ($username === 'admin' && $password === 'p455w0rd') {
         $userId = 1;
-        $expiry = 3600;
+        $expiration = time() + 3600;
         $issuer = 'localhost';
 
-        // Token erzeugen
-        $token = \ReallySimpleJWT\Token::create($userId, $secret, $expiry, $issuer);
-
+    
+        $token = \ReallySimpleJWT\Token::create($userId, $secret, $expiration, $issuer);
         $response->getBody()->write(json_encode(['token' => $token]));
     } else {
         $response = $response->withStatus(401);

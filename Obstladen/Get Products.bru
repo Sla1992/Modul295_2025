@@ -1,0 +1,27 @@
+meta {
+  name: Get Products
+  type: http
+  seq: 1
+}
+
+get {
+  url: localhost/Modul295/public/products
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Base: application/json
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI3NjIyNjcsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2Mjc1ODY2OH0.cXN2EEOzsCzMX3pZY0jhMujeOjhdaTi1F_B_Ka6nwNc
+}
+
+body:json {
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI3NjIyNjcsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2Mjc1ODY2OH0.cXN2EEOzsCzMX3pZY0jhMujeOjhdaTi1F_B_Ka6nwNc"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

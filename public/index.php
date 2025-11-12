@@ -224,6 +224,124 @@ $app->delete('/products/{id}', function (Request $req, Response $res, $args) use
     return $res;
 })->add($jwtMiddleware);
 
+// Category routes
+/**
+ * @OA\Get(
+ *    path="/categories",
+ *  summary="Get a List of all Categories",
+ *      tags={"Categories"}, 
+ * @OA\Parameter(
+ *      name="Authorization",  
+ *    in="header",
+ *     required=true,
+ *   @OA\Schema(
+ *        type="string",
+ *       example="Bearer {and the Token from /auth}"
+ *     )
+ * ),
+ *     @OA\Response(
+ *     response=200, description="List of Categories retrieved successfully",
+ * 
+ */
+$app->get('/categories', function (Request $req, Response $res) use ($controllerFactory) {
+    $controller = $controllerFactory();
+    $controller->listCategories();
+    return $res;
+})->add($jwtMiddleware);
+/**
+ * @OA\Get(
+ *    path="/categories/{id}",
+ *  summary="Get Category Info by ID",
+ *      tags={"Categories"}, 
+ * @OA\Parameter(
+ *      name="Authorization",  
+ *    in="header",
+ *     required=true,
+ *   @OA\Schema(
+ *        type="string",
+ *       example="Bearer {and the Token from /auth}"
+ *     )
+ * ),
+ *     @OA\Response(
+ *     response=200, description="Category info retrieved successfully",
+ * 
+ */
+$app->get('/categories/{id}', function (Request $req, Response $res, $args) use ($controllerFactory) {
+    $controller = $controllerFactory();
+    $controller->getCategory((int)$args['id']);
+    return $res;
+})->add($jwtMiddleware);
+/**
+ * @OA\Post(
+ *    path="/categories",
+ *  summary="Create a new Category",
+ *      tags={"Categories"}, 
+ * @OA\Parameter(
+ *      name="Authorization",  
+ *    in="header",
+ *     required=true,
+ *   @OA\Schema(
+ *        type="string",
+ *       example="Bearer {and the Token from /auth}"
+ *     )
+ * ),
+ *     @OA\Response(
+ *     response=201, description="Category created successfully",
+ * 
+ */
+$app->post('/categories', function (Request $req, Response $res) use ($controllerFactory) {
+    $controller = $controllerFactory();
+    $data = (array)$req->getParsedBody();
+    $controller->createCategory($data);
+    return $res;
+})->add($jwtMiddleware);
+/**
+ * @OA\Patch(
+ *    path="/categories/{id}",
+ *  summary="Update an existing Category by ID",
+ *      tags={"Categories"}, 
+ * @OA\Parameter(
+ *      name="Authorization",  
+ *    in="header",
+ *     required=true,
+ *   @OA\Schema(
+ *        type="string",
+ *       example="Bearer {and the Token from /auth}"
+ *     )
+ * ),
+ *     @OA\Response(
+ *     response=200, description="Category updated successfully",
+ * 
+ */
+$app->patch('/categories/{id}', function (Request $req, Response $res, $args) use ($controllerFactory) {
+    $controller = $controllerFactory();
+    $data = (array)$req->getParsedBody();
+    $controller->updateCategory((int)$args['id'], $data);
+    return $res;
+})->add($jwtMiddleware);
+/**
+ * @OA\Delete(
+ *    path="/categories/{id}",
+ *  summary="Delete a Category by ID",
+ *      tags={"Categories"}, 
+ * @OA\Parameter(
+ *      name="Authorization",  
+ *    in="header",
+ *     required=true,
+ *   @OA\Schema(
+ *        type="string",
+ *       example="Bearer {and the Token from /auth}"
+ *     )
+ * ),
+ *     @OA\Response(
+ *     response=200, description="Category deleted successfully",
+ * 
+ */
+$app->delete('/categories/{id}', function (Request $req, Response $res, $args) use ($controllerFactory) {
+    $controller = $controllerFactory();
+    $controller->deleteCategory((int)$args['id']);
+    return $res;
+})->add($jwtMiddleware);
 
 $app->run();
 

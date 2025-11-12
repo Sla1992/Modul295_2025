@@ -1,17 +1,16 @@
 meta {
-  name: Get Products
+  name: Delete Category
   type: http
-  seq: 3
+  seq: 12
 }
 
-get {
-  url: localhost/Modul295/public/products
-  body: json
+delete {
+  url: http://localhost/Modul295/public/categories/8
+  body: none
   auth: inherit
 }
 
 headers {
-  Content-Base: application/json
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI4MTU1NjMsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2MjgxMTk2M30.TF4bSs1uNIeZ40A8D1TRmMHsv5y-dQ9XG_2Bz1dNpX8
 }
 

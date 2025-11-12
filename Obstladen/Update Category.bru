@@ -1,0 +1,27 @@
+meta {
+  name: Update Category
+  type: http
+  seq: 10
+}
+
+patch {
+  url: http://localhost/Modul295/public/categories/8
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI4NDg4NzAsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2Mjg0NTI3MX0.zyB7uVmIE8dWHd1_hJZMUryhXWccqwpOJdut2Ji2gWc
+}
+
+body:json {
+  {
+    "active": 0,
+    "name": "Suessigkeit"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

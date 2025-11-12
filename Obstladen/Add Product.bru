@@ -1,15 +1,33 @@
 meta {
   name: Add Product
   type: http
-  seq: 3
+  seq: 7
 }
 
 post {
   url: http://localhost/Modul295/public/products
-  body: none
+  body: json
   auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI4MTU1NjMsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2MjgxMTk2M30.TF4bSs1uNIeZ40A8D1TRmMHsv5y-dQ9XG_2Bz1dNpX8
+}
+
+body:json {
+  {
+      "sku": "",
+      "active": "1",
+      "id_category": "1",
+      "name": "Mango",
+      "image": "",
+      "description": "Mango aus Brasilien",
+      "price": "2.85",
+      "stock": "86"
+    }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

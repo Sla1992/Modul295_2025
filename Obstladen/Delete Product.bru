@@ -1,15 +1,20 @@
 meta {
   name: Delete Product
   type: http
-  seq: 5
+  seq: 11
 }
 
 delete {
-  url: http://localhost/Modul295/public/products/5
+  url: http://localhost/Modul295/public/products/6
   body: none
   auth: inherit
 }
 
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI4MTU1NjMsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2MjgxMTk2M30.TF4bSs1uNIeZ40A8D1TRmMHsv5y-dQ9XG_2Bz1dNpX8
+}
+
 settings {
   encodeUrl: true
+  timeout: 0
 }

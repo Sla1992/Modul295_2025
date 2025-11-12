@@ -1,17 +1,26 @@
 meta {
   name: Update Product
   type: http
-  seq: 4
+  seq: 9
 }
 
 patch {
   url: http://localhost/Modul295/public/products/1
-  body: none
+  body: json
   auth: inherit
 }
 
 headers {
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI4MTU1NjMsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2MjgxMTk2M30.TF4bSs1uNIeZ40A8D1TRmMHsv5y-dQ9XG_2Bz1dNpX8
+}
+
+body:json {
+  {
+    "name": "Wassermelone",
+    "price": 4.90,
+    "stock": 25,
+    "id_category": 1
+  }
 }
 
 settings {

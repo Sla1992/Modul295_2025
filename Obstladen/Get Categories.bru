@@ -1,0 +1,21 @@
+meta {
+  name: Get Categories
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost/Modul295/public/categories
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI4NDg4NzAsImlzcyI6ImxvY2FsaG9zdCIsImlhdCI6MTc2Mjg0NTI3MX0.zyB7uVmIE8dWHd1_hJZMUryhXWccqwpOJdut2Ji2gWc
+  Content-Base: application/json
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

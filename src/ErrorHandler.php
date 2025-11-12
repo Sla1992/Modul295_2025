@@ -1,4 +1,5 @@
 <?php
+// Error Handling Class, it handles exceptions and returns the responses in JSON format
 class ErrorHandler {
     public static function handleException(Throwable $exception): void
     {

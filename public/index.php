@@ -1,33 +1,40 @@
 <?php
+// Enable strict types and error reporting
 declare(strict_types=1);
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
+// Use necessary namespaces
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use ReallySimpleJWT\Token;
 
+// Autoload dependencies and required files
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/ErrorHandler.php';
 require_once __DIR__ . '/../src/database.php';
 require_once __DIR__ . '/../src/TaskController.php';
 
+// Handle uncaught exceptions globally
 set_exception_handler("ErrorHandler::handleException");
 
+// JWT configuration
 $secret = 'sec!ReT423*&'; 
+// Token expiration time set to 1 hour from now (here i forgot the time() function and lost plenty of time debugging it)
 $tokenExpiry = time() + 3600; 
 
 $app = AppFactory::create();
-
+// Set the base path for the application
 $scriptName = $_SERVER['SCRIPT_NAME'];
 $basePath = str_replace('/index.php', '', $scriptName);
 $app->setBasePath($basePath);
+// Add Middleware
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
-
+// My Database connection
 $db = new Database('localhost', 'modul295', 'root', '');
 $conn = $db->getConnection();
 
@@ -87,21 +94,21 @@ $jwtMiddleware = function (Request $request, $handler) use ($secret) {
 * @OA\Response(response="200", description="Response with status 200 and the Bearer Token"))
 * )
 */
-
+// Authentication route to get the Bearer Token
 $app->post('/auth', function (Request $request, Response $response) use ($secret) {
     $data = $request->getParsedBody();
     $username = $data['username'] ?? '';
     $password = $data['password'] ?? '';
-
+    // For the Project, i used hardcoded credentials. In production, i have to verify against a user database.
     if ($username === 'admin' && $password === 'p455w0rd') {
+        // If credentials are valid, create and return a token
         $userId = 1;
         $expiration = time() + 3600;
         $issuer = 'localhost';
-
-    
         $token = \ReallySimpleJWT\Token::create($userId, $secret, $expiration, $issuer);
         $response->getBody()->write(json_encode(['token' => $token]));
     } else {
+        //If not, it gives me Invalid credentials
         $response = $response->withStatus(401);
         $response->getBody()->write(json_encode(['error' => 'Invalid credentials']));
     }
@@ -109,7 +116,7 @@ $app->post('/auth', function (Request $request, Response $response) use ($secret
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-
+// Factory to create the Instance of the TaskController
 $controllerFactory = function() use ($conn) {
     return new TaskController($conn);
 };
@@ -122,7 +129,7 @@ $controllerFactory = function() use ($conn) {
 *   
 *   @OA\Response(response="200", description="Response with status 200 and the list of products"))
 */
-
+// Product routes
 $app->get('/products', function (Request $req, Response $res) use ($controllerFactory) {
     $controller = $controllerFactory();
     $controller->listProducts();
@@ -263,6 +270,7 @@ $app->delete('/products/{id}', function (Request $req, Response $res, $args) use
 *   
 *   @OA\Response(response="200", description="Response with status 200 and the list of categories"))
 */
+// Category routes
 $app->get('/categories', function (Request $req, Response $res) use ($controllerFactory) {
     $controller = $controllerFactory();
     $controller->listCategories();

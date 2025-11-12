@@ -9,7 +9,7 @@ class TaskController
     }
 
 //Products------------------------------------------------------------------------
-//Get a List of all the products in the table
+    //Get a List of all the products in the table
     public function listProducts(): void
     {
         $sql = "SELECT * FROM product";
@@ -24,10 +24,10 @@ class TaskController
 
 
 
-//Get Info from product by a ID
+    //Get Info from product by a ID
     public function getProduct(int $id): void
     {
-        //To Do: Check my Code for SQL Injection possibilities
+        
         $stmt = $this->conn->prepare("SELECT * FROM product WHERE product_id = ?");
         $stmt->bind_param('i', $id);
         $stmt->execute();
@@ -44,7 +44,7 @@ class TaskController
     public function createProduct(array $data): void
     {
 
-        //To Do: Check my Code for SQL Injection possibilities
+        
         $sql = "INSERT INTO product (sku, active, id_category, name, image, description, price, stock)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
@@ -69,10 +69,10 @@ class TaskController
     }
 
 
-//Alter a Product chosen by ID
+    //Alter a Product chosen by ID
     public function updateProduct(int $id, array $data): void
     {
-        //To Do: Check my Code for SQL Injection possibilities
+    
         $sql = "UPDATE product SET sku=?, active=?, id_category=?, name=?, image=?, description=?, price=?, stock=? WHERE product_id=?";
         $stmt = $this->conn->prepare($sql);
         $sku = $data['sku'] ?? '';
@@ -97,7 +97,6 @@ class TaskController
     //Delete a Product by ID
     public function deleteProduct(int $id): void
     {
-        //To Do: Check my Code for SQL Injection possibilities
         $stmt = $this->conn->prepare("DELETE FROM product WHERE product_id = ?");
         $stmt->bind_param('i', $id);
         if ($stmt->execute()) {
@@ -117,7 +116,8 @@ class TaskController
         header('Content-Type: application/json; charset=UTF-8');
         echo json_encode($rows);
     }
-//Get Info from category by a ID
+
+    //Get Info from category by a ID
     public function getCategory(int $id): void
     {
         $stmt = $this->conn->prepare("SELECT * FROM category WHERE category_id = ?");
@@ -131,7 +131,8 @@ class TaskController
             echo json_encode(['error'=>'Category not found']);
         }
     }
-//Create a new category
+
+    //Create a new category
     public function createCategory(array $data): void
     {
         $active = $data['active'] ?? 1;
@@ -148,7 +149,8 @@ class TaskController
             echo json_encode(['error' => $stmt->error]);
         }
     }
-//Alter a category chosen by ID
+
+    //Alter a category chosen by ID
     public function updateCategory(int $id, array $data): void
     {
         $active = $data['active'] ?? 1;
@@ -163,7 +165,8 @@ class TaskController
             echo json_encode(['error' => $stmt->error]);
         }
     }
-//Delete a category by ID
+
+    //Delete a category by ID
     public function deleteCategory(int $id): void
     {
         $stmt = $this->conn->prepare("DELETE FROM category WHERE category_id=?");

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fruitstore API Swagger UI</title>
+  <link rel="stylesheet" type="text/css" href="swagger-ui.css" />
+</head>
+<body>
+  <div id="swagger-ui"></div>
+
+  <script src="swagger-ui-bundle.js"></script>
+  <script src="swagger-ui-standalone-preset.js"></script>
+  <script>
+    const ui = SwaggerUIBundle({
+  url: "http://localhost/Modul295/public/swagger.php",
+  dom_id: '#swagger-ui',
+  presets: [
+    SwaggerUIBundle.presets.apis,
+    SwaggerUIStandalonePreset
+  ],
+  layout: "StandaloneLayout"
+});
+  </script>
+</body>
+</html>

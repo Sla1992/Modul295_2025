@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Swagger UI HTML File -->
 <head>
   <meta charset="UTF-8">
   <title>Fruitstore API Swagger UI</title>
   <link rel="stylesheet" type="text/css" href="swagger-ui.css" />
 </head>
 <body>
+  <!-- Swagger UI Container -->
   <div id="swagger-ui"></div>
-
   <script src="swagger-ui-bundle.js"></script>
   <script src="swagger-ui-standalone-preset.js"></script>
   <script>
+    // Initialize Swagger UI
     const ui = SwaggerUIBundle({
+      // Swagger UI Configuration
   url: "http://localhost/Modul295/public/swagger.php",
   dom_id: '#swagger-ui',
+  // Use presets for API and Standalone layout
   presets: [
     SwaggerUIBundle.presets.apis,
     SwaggerUIStandalonePreset
   ],
+  // Set the layout to StandaloneLayout
   layout: "StandaloneLayout"
 });
   </script>

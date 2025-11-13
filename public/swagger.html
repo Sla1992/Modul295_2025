@@ -2,15 +2,19 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
+    <!-- Swagger UI HTML File -->
     <meta charset="UTF-8" />
     <title>API Dokumentation</title>
+    <!-- Swagger UI CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
   </head>
   <body>
+    <!-- Swagger UI Container -->
     <div id="swagger-ui"></div>
-
+    <!-- Swagger UI Bundle and Initialization -->
     <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
     <script>
+        // Initialize Swagger UI
       SwaggerUIBundle({
         url: "../swagger.php", 
         dom_id: "#swagger-ui",
